@@ -1,2 +1,0 @@
-rmsd: 0.505
-chemical weight: 1.0 
