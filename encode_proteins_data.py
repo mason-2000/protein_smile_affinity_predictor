@@ -4,6 +4,7 @@ import torch
 import numpy as np
 from Bio.SeqUtils.ProtParam import ProteinAnalysis
 import multiprocessing as mp
+import sys
 
 global model, alphabet, batch_converter
 model = None
@@ -81,9 +82,9 @@ def init_model():
     model.eval()
 
 
-def load_data(base_path='raw_data/'):
+def load_data():
     
-        proteins = pd.read_csv(base_path + 'proteins.csv', index_col=0)
+        proteins = pd.read_csv(sys.argv[1], index_col=0)
         proteins.drop('Accession_Number', axis=1, inplace=True)
         
         return proteins
