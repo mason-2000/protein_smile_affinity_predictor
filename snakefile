@@ -9,7 +9,7 @@ rule encode_drugs:
     output: 
         "encoded_data/encoded_drugs.csv"
     shell:
-        "python3 encode_drugs_data.py"
+        "python3 encode_drugs_data.py {input}"
 
 rule encode_proteins:
     input: 
@@ -17,7 +17,7 @@ rule encode_proteins:
     output: 
         "encoded_data/encoded_proteins.csv"
     shell:
-        "python3 encode_proteins_data.py"
+        "python3 encode_proteins_data.py {input}"
 
 rule merge_data:
     input:
@@ -27,7 +27,7 @@ rule merge_data:
     output:
         "encoded_data/merged_dataset.csv"
     shell:
-        "python3 merge_datasets.py"
+        "python3 merge_datasets.py {input}"
 
 rule train_model:
     input:
@@ -36,4 +36,4 @@ rule train_model:
         "model/protein_smile_LR.joblib",
         "model/model_summary.txt"
     shell:
-        "python3 train_tune_model.py"
+        "python3 train_tune_model.py {input}"
