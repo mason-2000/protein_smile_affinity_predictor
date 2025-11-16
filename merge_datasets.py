@@ -2,6 +2,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler
+import sys
 
 def save_output(merged_dataset, out_path='encoded_data/'):
     
@@ -77,12 +78,12 @@ def rescale_features(encoded_drugs, encoded_proteins, targets, scaler_proteins=N
         
     return encoded_proteins, encoded_drugs, targets
 
-def load_data(base_path='encoded_data/'):
+def load_data():
     
 
-        encoded_drugs = pd.read_csv(base_path + 'encoded_drugs.csv', index_col=0)
-        encoded_proteins = pd.read_csv(base_path + 'encoded_proteins.csv', index_col=0)
-        targets = pd.read_csv(base_path + 'drug_protein_affinity.csv')
+        encoded_drugs = pd.read_csv(sys.argv[2], index_col=0)
+        encoded_proteins = pd.read_csv(sys.argv[1], index_col=0)
+        targets = pd.read_csv(sys.argv[3])
 
         return encoded_drugs, encoded_proteins, targets
     
@@ -92,6 +93,8 @@ if __name__ == '__main__':
     res_encoded_proteins, res_encoded_drugs, res_targets = rescale_features(encoded_drugs, encoded_proteins, targets)
     merged_dataset = merge_datasets(res_encoded_proteins, res_encoded_drugs, res_targets)
     save_output(merged_dataset)
+    
+    
     
     
     
