@@ -43,6 +43,8 @@ Tunes a weighted ElasticNet regression model over multiple chemical/embedding we
 
 Saves the best-performing model to models/protein_smile_LR.joblib.
 
+# The entire pipeline can be managed via the snakefile (sankemake framework)
+
 Folder Structure
 project_root/
 │
