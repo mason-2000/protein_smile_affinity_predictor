@@ -6,6 +6,7 @@ from sklearn.linear_model import ElasticNetCV
 from sklearn.metrics import mean_squared_error
 from joblib import dump
 import time
+import sys
 
 def save_output(best_model, best_rmsd, best_w, out_path='model/protein_smile_LR.joblib'):
     
@@ -99,9 +100,9 @@ def split_dataset(dataset):
     
     return x_train, x_test, y_train, y_test
 
-def load_data(input_path='encoded_data/merged_dataset.csv'):
+def load_data():
     
-    dataset = pd.read_csv(input_path, index_col=0)
+    dataset = pd.read_csv(sys.argv[1], index_col=0)
     
     return dataset
 
@@ -110,5 +111,6 @@ if __name__ == '__main__':
     dataset = load_data()
     best_model, best_rmsd, best_w = tune_model(dataset)
     save_output(best_model, best_rmsd, best_w)
+    
     
     
