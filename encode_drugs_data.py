@@ -6,6 +6,7 @@ import torch
 import numpy as np
 import pandas as pd
 import multiprocessing as mp
+import sys
 
 global model, tokenizer
 model = None
@@ -67,9 +68,9 @@ def smiles_to_chemberta_embedding(smiles: str) -> np.ndarray:
     
     return embeddings[0].cpu().numpy().astype(np.float32)
 
-def load_data(base_path='raw_data/'):
+def load_data():
     
-        drugs = pd.read_csv(base_path + 'drugs.csv', index_col=0)
+        drugs = pd.read_csv(sys.argv[1], index_col=0)
         drugs.drop(['CID', 'Canonical_SMILES'], axis=1, inplace=True)
 
         return drugs
@@ -99,6 +100,9 @@ if __name__ == '__main__':
     
     encoded_drugs = pd.concat([descriptor_df, embedded_df], axis=1)
     save_output(encoded_drugs)
+        
+        
+        
         
         
         
